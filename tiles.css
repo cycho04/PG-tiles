@@ -1,0 +1,21 @@
+body {
+	text-align: center; /*centers title*/
+}
+
+/*targets each tile*/
+.cards {
+	margin: 15px; /*spacing between cards*/
+	float: left; /*all in-line*/
+} 
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 175px;
+	height: 250px;
+}
+
+.container {
+	margin: auto;
+	max-width: 850px;
+}
