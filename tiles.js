@@ -1,3 +1,11 @@
+//GET file:///C:/Users/chris/CS/Tiles/imgs/L8 net::ERR_FILE_NOT_FOUND <-- console error
+//^^Fixed
+//Array now resets every time with click. array doesnt "run out".
+//full deck every time.
+//
+
+
+// the variable array. splice and reset this array.
 var tilesSet = [
 	//High Tiles
 	{
@@ -262,7 +270,7 @@ var tilesSet = [
 		val: 8,
 		rValue: 8,
 		pair: 14,
-		img: "imgs/L8#.jpeg"
+		img: "imgs/L8(2).jpeg" //fixed wrong file name error.
 	},
 	{
 		name: "R7",
@@ -304,11 +312,45 @@ var tilesSet = [
 
 
 
+
+
 //-----------------------------------------------------------
 //							LOGIC
 //-----------------------------------------------------------
 
-//randomizes the hands. prototyp, but it works.
-$("button").on("click", function(){
-	$("#1").attr("src", tilesSet[Math.floor(Math.random()* 31)].img);
+
+//master copy of tiles array. refer to this when resetting array
+var master = [];
+for (i = 0; i < tilesSet.length; i++) {
+	master.push(tilesSet[i]);
+}
+
+
+//randomizes the hands.
+$("#random").on("click", function(){
+	//tilesSet used
+	var index = Math.floor(Math.random()* tilesSet.length); 
+	//changes the src to a random tiles src from imgs folder  
+	$("#1").attr("src", tilesSet[index].img);
+	// splices the selected array, so there won't be the same 4 tiles. always a new tile.
+	tilesSet.splice(index, 1);
+
+	var index = Math.floor(Math.random()* tilesSet.length);
+	$("#2").attr("src", tilesSet[index].img);
+	tilesSet.splice(index, 1); //----------------------------
+
+	var index = Math.floor(Math.random()* tilesSet.length);
+	$("#3").attr("src", tilesSet[index].img);
+	tilesSet.splice(index, 1); //------------------------------
+
+	var index = Math.floor(Math.random()* tilesSet.length);
+	$("#4").attr("src", tilesSet[index].img);
+	tilesSet.splice(index, 1); //--------------------------
+
+	//resets tilesSet from master array. Even after splice, it now has full deck again.
+	tilesSet = [];
+	for (i = 0; i < master.length; i++) {
+	tilesSet.push(master[i]);
+	}
 });
+

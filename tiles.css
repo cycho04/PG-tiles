@@ -1,5 +1,7 @@
 body {
 	text-align: center; /*centers title*/
+	/*need to fix background size or better img*/
+	background-image: url("https://us.123rf.com/450wm/travelman/travelman1801/travelman180100029/93395817-green-felt-texture-for-poker-and-casino-.jpg?ver=6");
 }
 
 /*targets each tile*/
