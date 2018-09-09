@@ -356,23 +356,34 @@ $("#random").on("click", function(){
 	for (i = 0; i < master.length; i++) {
 		tilesSet.push(master[i]);
 		}
+
+	identifyCards();
 });
 
-
+//Used to see if pair is recognized. eliminates duplicate pair identification.
+var checkPair = [0, 0, 0, 0];
 
 //houseway button
 $("#houseway").on("click", function(){
-	identifyCards();
+	//prototype. is able to recognize the correct number of pairs. got rid of duplicate identify
+	//loops through each hand
 	for(i = 0; i < 4; i++) {
+		//compares each hand to i
 		for (ii = 0; ii < 4; ii++) {
+			//if they are pairs and not the same hand
 			if (hand[i].pair == hand[ii].pair && i != ii) {
-				console.log("pair");
+				//if this pair hasn't already been identified.
+				if (checkPair[i] == 0 && checkPair[ii] == 0) {
+					//places pairs into checkPair array to avoid duplication
+					checkPair[i] = hand[i].pair;
+					checkPair[ii] = hand[ii].pair;
+					console.log("pair");
+				}
 			}
-		
 		}
-
 	}
-		
+	//resets back to og array for new hand.
+	checkPair =[0, 0, 0, 0];
 })
 
 
