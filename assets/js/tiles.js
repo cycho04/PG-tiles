@@ -1,8 +1,3 @@
-//GET file:///C:/Users/chris/CS/Tiles/imgs/L8 net::ERR_FILE_NOT_FOUND <-- console error
-//^^Fixed
-//Array now resets every time with click. array doesnt "run out".
-//full deck every time.
-//
 
 
 // the variable array. splice and reset this array.
@@ -18,7 +13,7 @@ var tilesSet = [
 		rValue: 36,
 
 		pair: 1, //its pair has the same value
-		img: "imgs/GeeJoon3.jpeg" //imgs in a folder in same directory
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/GeeJoon3.jpeg" //imgs in a folder in same directory
 	},
 	{
 		name: "GJ6",
@@ -30,7 +25,7 @@ var tilesSet = [
 		rValue: 36,
 
 		pair: 1,
-		img: "imgs/GeeJoon6.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/GeeJoon6.jpeg"
 	},
 	{
 		name: "teen",
@@ -39,7 +34,7 @@ var tilesSet = [
 		val: 2,
 		rValue: 12,
 		pair: 2,
-		img: "imgs/Teen1.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/Teen1.jpeg"
 	},
 	{
 		name: "teen",
@@ -48,7 +43,7 @@ var tilesSet = [
 		val: 2,
 		rValue: 12,
 		pair: 2,
-		img: "imgs/Teen2.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/Teen2.jpeg"
 	},
 	{
 		name: "dey",
@@ -57,7 +52,7 @@ var tilesSet = [
 		val: 2,
 		rValue: 12,
 		pair: 3,
-		img: "imgs/Dey1.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/Dey1.jpeg"
 	},
 	{
 		name: "dey",
@@ -66,7 +61,7 @@ var tilesSet = [
 		val: 2,
 		rValue: 12,
 		pair: 3,
-		img: "imgs/dey2.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/dey2.jpeg"
 	},
 	{
 		name: "H8",
@@ -75,7 +70,7 @@ var tilesSet = [
 		val: 8,
 		rValue: 8,
 		pair: 4,
-		img: "imgs/H8.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/H8.jpeg"
 	},
 	{
 		name: "H8",
@@ -84,7 +79,7 @@ var tilesSet = [
 		val: 8,
 		rValue: 8,
 		pair: 4,
-		img: "imgs/height2.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/height2.jpeg"
 	},
 	{
 		name: "H4",
@@ -93,7 +88,7 @@ var tilesSet = [
 		val: 4,
 		rValue: 4,
 		pair: 5,
-		img: "imgs/H4.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/H4.jpeg"
 	},
 	{
 		name: "H4",
@@ -102,7 +97,7 @@ var tilesSet = [
 		val: 4,
 		rValue: 4,
 		pair: 5,
-		img: "imgs/hfour2.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/hfour2.jpeg"
 	},
 
 	//Symmetric tiles
@@ -113,7 +108,7 @@ var tilesSet = [
 		val: 0,
 		rValue: 10,
 		pair: 6,
-		img: "imgs/H10.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/H10.jpeg"
 	},
 	{
 		name: "H10",
@@ -122,7 +117,7 @@ var tilesSet = [
 		val: 0,
 		rValue: 10,
 		pair: 6,
-		img: "imgs/hten2.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/hten2.jpeg"
 	},
 	{
 		name: "H6",
@@ -131,7 +126,7 @@ var tilesSet = [
 		val: 6,
 		rValue: 6,
 		pair: 7,
-		img: "imgs/H6.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/H6.jpeg"
 	},
 	{
 		name: "H6",
@@ -140,7 +135,7 @@ var tilesSet = [
 		val: 6,
 		rValue: 6,
 		pair: 7,
-		img: "imgs/hsix2.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/hsix2.jpeg"
 	},
 	{
 		name: "L4",
@@ -149,7 +144,7 @@ var tilesSet = [
 		val: 4,
 		rValue: 4,
 		pair: 8,
-		img: "imgs/L4.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/L4.jpeg"
 	},
 	{
 		name: "L4",
@@ -158,7 +153,7 @@ var tilesSet = [
 		val: 4,
 		rValue: 4,
 		pair: 8,
-		img: "imgs/lfour2.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/lfour2.jpeg"
 	},
 
 	//Half Symmetric tiles
@@ -169,7 +164,7 @@ var tilesSet = [
 		val: 1,
 		rValue: 11,
 		pair: 9,
-		img: "imgs/eleven.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/eleven.jpeg"
 	},
 	{
 		name: "11",
@@ -178,7 +173,7 @@ var tilesSet = [
 		val: 1,
 		rValue: 11,
 		pair: 9,
-		img: "imgs/eleven2.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/eleven2.jpeg"
 	},
 	{
 		name: "L10",
@@ -187,7 +182,7 @@ var tilesSet = [
 		val: 0,
 		rValue: 10,
 		pair: 10,
-		img: "imgs/L10.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/L10.jpeg"
 	},
 	{
 		name: "L10",
@@ -196,7 +191,7 @@ var tilesSet = [
 		val: 0,
 		rValue: 10,
 		pair: 10,
-		img: "imgs/lten2.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/lten2.jpeg"
 	},
 	{
 		name: "H7",
@@ -205,7 +200,7 @@ var tilesSet = [
 		val: 7,
 		rValue: 7,
 		pair: 11,
-		img: "imgs/H7.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/H7.jpeg"
 	},
 	{
 		name: "H7",
@@ -214,7 +209,7 @@ var tilesSet = [
 		val: 7,
 		rValue: 7,
 		pair: 11,
-		img: "imgs/hseven2.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/hseven2.jpeg"
 	},
 	{
 		name: "L6",
@@ -223,7 +218,7 @@ var tilesSet = [
 		val: 6,
 		rValue: 6,
 		pair: 12,
-		img: "imgs/L6.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/L6.jpeg"
 	},
 	{
 		name: "L6",
@@ -232,7 +227,7 @@ var tilesSet = [
 		val: 6,
 		rValue: 6,
 		pair: 12,
-		img: "imgs/lsix2.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/lsix2.jpeg"
 	},
 
 	//Mixed pairs
@@ -243,7 +238,7 @@ var tilesSet = [
 		val: 9,
 		rValue: 9,
 		pair: 13,
-		img: "imgs/R9.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/R9.jpeg"
 	},
 	{
 		name: "W9",
@@ -252,7 +247,7 @@ var tilesSet = [
 		val: 9,
 		rValue: 9,
 		pair: 13,
-		img: "imgs/W9.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/W9.jpeg"
 	},
 	{
 		name: "L8",
@@ -261,7 +256,7 @@ var tilesSet = [
 		val: 8,
 		rValue: 8,
 		pair: 14,
-		img: "imgs/L8.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/L8.jpeg"
 	},
 	{
 		name: "WL8",
@@ -270,7 +265,7 @@ var tilesSet = [
 		val: 8,
 		rValue: 8,
 		pair: 14,
-		img: "imgs/L8(2).jpeg" //fixed wrong file name error.
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/L8(2).jpeg" //fixed wrong file name error.
 	},
 	{
 		name: "R7",
@@ -279,7 +274,7 @@ var tilesSet = [
 		val: 7,
 		rValue: 7,
 		pair: 15,
-		img: "imgs/R7.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/R7.jpeg"
 	},
 	{
 		name: "W7",
@@ -288,7 +283,7 @@ var tilesSet = [
 		val: 7,
 		rValue: 7,
 		pair: 15,
-		img: "imgs/W7.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/W7.jpeg"
 	},
 	{
 		name: "R5",
@@ -297,7 +292,7 @@ var tilesSet = [
 		val: 5,
 		rValue: 5,
 		pair: 16,
-		img: "imgs/R5.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/R5.jpeg"
 	},
 	{
 		name: "W5",
@@ -306,7 +301,7 @@ var tilesSet = [
 		val: 5,
 		rValue: 5,
 		pair: 16,
-		img: "imgs/W5.jpeg"
+		img: "file:///C:/Users/chris/CS/Tiles/imgs/W5.jpeg"
 	}
 ]
 
@@ -318,105 +313,101 @@ var tilesSet = [
 //							LOGIC
 //-----------------------------------------------------------
 
-// each hand hold their respective tile's object.
-//placed inside an array for easy loop access.
-var hand = [{}, {}, {}, {}]
-
-
 //master copy of tiles array. refer to this when resetting array
 var master = [];
-for (i = 0; i < tilesSet.length; i++) {
+for (var i = 0; i < tilesSet.length; i++) {
 	master.push(tilesSet[i]);
 }
 
+// each hand holds their respective tile's object.
+//placed inside an array for easy loop access.
+var hand = [];
 
-//randomizes the hands.
-$("#random").on("click", function(){
-	//tilesSet used
-	var index = Math.floor(Math.random()* tilesSet.length); 
-	//changes the src to a random tiles src from imgs folder  
-	$("#0").attr("src", tilesSet[index].img);
-	// splices the selected array, so there won't be the same 4 tiles. always a new tile.
-	tilesSet.splice(index, 1);
+var random = document.getElementById("random");
+var houseway = document.getElementById("houseway");
 
-	var index = Math.floor(Math.random()* tilesSet.length);
-	$("#1").attr("src", tilesSet[index].img);
-	tilesSet.splice(index, 1); //----------------------------
+//selects each hand and retrieves their html code
+var card1 = document.getElementById("0");
+var card2 = document.getElementById("1");
+var card3 = document.getElementById("2");
+var card4 = document.getElementById("3");
 
-	var index = Math.floor(Math.random()* tilesSet.length);
-	$("#2").attr("src", tilesSet[index].img);
-	tilesSet.splice(index, 1); //------------------------------
 
-	var index = Math.floor(Math.random()* tilesSet.length);
-	$("#3").attr("src", tilesSet[index].img);
-	tilesSet.splice(index, 1); //--------------------------
+var cards = [card1, card2, card3, card4];
 
-	//resets tilesSet from master array. Even after splice, it now has full deck again.
-	tilesSet = [];
-	for (i = 0; i < master.length; i++) {
-		tilesSet.push(master[i]);
-		}
-
-	identifyCards();
-});
 
 //Used to see if pair is recognized. eliminates duplicate pair identification.
-var checkPair = [0, 0, 0, 0];
+//stores the obj's .pair(unique to each pair) houseway button
+var duplicatePair = [0, 0, 0, 0];
 
-//houseway button
-$("#houseway").on("click", function(){
-	//prototype. is able to recognize the correct number of pairs. got rid of duplicate identify
-	//loops through each hand
-	for(i = 0; i < 4; i++) {
-		//compares each hand to i
-		for (ii = 0; ii < 4; ii++) {
-			//if they are pairs and not the same hand
-			if (hand[i].pair == hand[ii].pair && i != ii) {
-				//if this pair hasn't already been identified.
-				if (checkPair[i] == 0 && checkPair[ii] == 0) {
-					//places pairs into checkPair array to avoid duplication
-					checkPair[i] = hand[i].pair;
-					checkPair[ii] = hand[ii].pair;
-					console.log("pair");
-				}
-			}
-		}
-	}
-	//resets back to og array for new hand.
-	checkPair =[0, 0, 0, 0];
+
+
+
+//Game initialize
+newHand();
+
+//random button
+random.addEventListener("click", function(){
+	newHand();
+	reset();
+})
+
+
+//houseway button. need work
+houseway.addEventListener("click", function(){
+	checkPair();
 })
 
 
 
-//
-//
-//
-//
-//
-//
-//
-//identifies each hand's tile.
-function identifyCards() {
-	// 1 because of id =1 for the $("#" + 1), 5 because we want 1 2 3 4.
-	//loops through the 4 hands.
-	for(i = 0; i < 4; i++) {
-		//loops through entire deck to find corresponding tile object
-		for(ii = 0; ii < tilesSet.length; ii++) {
-			//if the img tags match and we're on hand 1
-			if ($("#" + i).attr("src") == tilesSet[ii].img && i == 0) {
-				hand[0] = tilesSet[ii]; //set hand1 to hold the tile object
-				}
-			else if ($("#" + i).attr("src") == tilesSet[ii].img && i == 1) {
-				hand[1] = tilesSet[ii];
-				}
-			else if ($("#" + i).attr("src") == tilesSet[ii].img && i == 2) {
-				hand[2] = tilesSet[ii];
-				}
-			else if ($("#" + i).attr("src") == tilesSet[ii].img && i == 3) {
-				hand[3] = tilesSet[ii];
+
+
+
+
+
+//generates new hand
+function newHand() {
+
+	for(var i = 0; i < 4; i++){
+		var index = Math.floor(Math.random()* tilesSet.length); 
+		//changes the src to a random tiles src from imgs folder  
+		cards[i].src = tilesSet[index].img;
+		hand[i] = tilesSet[index];
+		// splices the selected array, so there won't be the same 4 tiles. always a new tile.
+		tilesSet.splice(index, 1);
+	}	
+}
+
+
+//check for pairs
+function checkPair() {
+	//loops through each hand
+	for(var i = 0; i < 4; i++) {
+		//compares each hand to i
+		for (var ii = 0; ii < 4; ii++) {
+			//if they are pairs and not the same hand
+
+			if (hand[i].pair === hand[ii].pair && i != ii) {
+				//if this pair hasn't already been identified. first time
+				if (duplicatePair[i] === 0 && duplicatePair[ii] === 0) {
+					//places pairs into duplicatePair array to avoid duplication
+					duplicatePair[i] = cards[i].pair;
+					duplicatePair[ii] = cards[ii].pair;
+					console.log("pair of " + hand[i].name);
 				}
 			}
 		}
+	}
 }
-//
-//
+
+
+
+function reset() {
+
+	//resets tilesSet from master array. Even after splice, it now has full deck again.
+	tilesSet = [];
+	for (var i = 0; i < master.length; i++) {
+		tilesSet.push(master[i]);
+	}
+	duplicatePair =[0, 0, 0, 0];
+}
