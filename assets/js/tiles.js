@@ -331,12 +331,6 @@ var card1 = document.getElementById("0");
 var card2 = document.getElementById("1");
 var card3 = document.getElementById("2");
 var card4 = document.getElementById("3");
-// returns the img src in the correct format that matches the obj's img attr, instead of the absolute path.
-var img1 = card1.getAttribute("src");
-var img2 = card2.getAttribute("src");
-var img3 = card3.getAttribute("src");
-var img4 = card4.getAttribute("src");
-
 var cards = [card1, card2, card3, card4];
 
 
