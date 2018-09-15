@@ -13,7 +13,7 @@ var tilesSet = [
 		rValue: 36,
 
 		pair: 1, //its pair has the same value
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/GeeJoon3.jpeg" //imgs in a folder in same directory
+		img: "imgs/GeeJoon3.jpeg" //imgs in a folder in same directory
 	},
 	{
 		name: "GJ6",
@@ -25,7 +25,7 @@ var tilesSet = [
 		rValue: 36,
 
 		pair: 1,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/GeeJoon6.jpeg"
+		img: "imgs/GeeJoon6.jpeg"
 	},
 	{
 		name: "teen",
@@ -34,7 +34,7 @@ var tilesSet = [
 		val: 2,
 		rValue: 12,
 		pair: 2,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/Teen1.jpeg"
+		img: "imgs/Teen1.jpeg"
 	},
 	{
 		name: "teen",
@@ -43,7 +43,7 @@ var tilesSet = [
 		val: 2,
 		rValue: 12,
 		pair: 2,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/Teen2.jpeg"
+		img: "imgs/Teen2.jpeg"
 	},
 	{
 		name: "dey",
@@ -52,7 +52,7 @@ var tilesSet = [
 		val: 2,
 		rValue: 12,
 		pair: 3,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/Dey1.jpeg"
+		img: "imgs/Dey1.jpeg"
 	},
 	{
 		name: "dey",
@@ -61,7 +61,7 @@ var tilesSet = [
 		val: 2,
 		rValue: 12,
 		pair: 3,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/dey2.jpeg"
+		img: "imgs/dey2.jpeg"
 	},
 	{
 		name: "H8",
@@ -70,7 +70,7 @@ var tilesSet = [
 		val: 8,
 		rValue: 8,
 		pair: 4,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/H8.jpeg"
+		img: "imgs/H8.jpeg"
 	},
 	{
 		name: "H8",
@@ -79,7 +79,7 @@ var tilesSet = [
 		val: 8,
 		rValue: 8,
 		pair: 4,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/height2.jpeg"
+		img: "imgs/height2.jpeg"
 	},
 	{
 		name: "H4",
@@ -88,7 +88,7 @@ var tilesSet = [
 		val: 4,
 		rValue: 4,
 		pair: 5,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/H4.jpeg"
+		img: "imgs/H4.jpeg"
 	},
 	{
 		name: "H4",
@@ -97,7 +97,7 @@ var tilesSet = [
 		val: 4,
 		rValue: 4,
 		pair: 5,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/hfour2.jpeg"
+		img: "imgs/hfour2.jpeg"
 	},
 
 	//Symmetric tiles
@@ -108,7 +108,7 @@ var tilesSet = [
 		val: 0,
 		rValue: 10,
 		pair: 6,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/H10.jpeg"
+		img: "imgs/H10.jpeg"
 	},
 	{
 		name: "H10",
@@ -117,7 +117,7 @@ var tilesSet = [
 		val: 0,
 		rValue: 10,
 		pair: 6,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/hten2.jpeg"
+		img: "imgs/hten2.jpeg"
 	},
 	{
 		name: "H6",
@@ -126,7 +126,7 @@ var tilesSet = [
 		val: 6,
 		rValue: 6,
 		pair: 7,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/H6.jpeg"
+		img: "imgs/H6.jpeg"
 	},
 	{
 		name: "H6",
@@ -135,7 +135,7 @@ var tilesSet = [
 		val: 6,
 		rValue: 6,
 		pair: 7,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/hsix2.jpeg"
+		img: "imgs/hsix2.jpeg"
 	},
 	{
 		name: "L4",
@@ -144,7 +144,7 @@ var tilesSet = [
 		val: 4,
 		rValue: 4,
 		pair: 8,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/L4.jpeg"
+		img: "imgs/L4.jpeg"
 	},
 	{
 		name: "L4",
@@ -153,7 +153,7 @@ var tilesSet = [
 		val: 4,
 		rValue: 4,
 		pair: 8,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/lfour2.jpeg"
+		img: "imgs/lfour2.jpeg"
 	},
 
 	//Half Symmetric tiles
@@ -164,7 +164,7 @@ var tilesSet = [
 		val: 1,
 		rValue: 11,
 		pair: 9,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/eleven.jpeg"
+		img: "imgs/eleven.jpeg"
 	},
 	{
 		name: "11",
@@ -173,7 +173,7 @@ var tilesSet = [
 		val: 1,
 		rValue: 11,
 		pair: 9,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/eleven2.jpeg"
+		img: "imgs/eleven2.jpeg"
 	},
 	{
 		name: "L10",
@@ -182,7 +182,7 @@ var tilesSet = [
 		val: 0,
 		rValue: 10,
 		pair: 10,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/L10.jpeg"
+		img: "imgs/L10.jpeg"
 	},
 	{
 		name: "L10",
@@ -191,7 +191,7 @@ var tilesSet = [
 		val: 0,
 		rValue: 10,
 		pair: 10,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/lten2.jpeg"
+		img: "imgs/lten2.jpeg"
 	},
 	{
 		name: "H7",
@@ -200,7 +200,7 @@ var tilesSet = [
 		val: 7,
 		rValue: 7,
 		pair: 11,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/H7.jpeg"
+		img: "imgs/H7.jpeg"
 	},
 	{
 		name: "H7",
@@ -209,7 +209,7 @@ var tilesSet = [
 		val: 7,
 		rValue: 7,
 		pair: 11,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/hseven2.jpeg"
+		img: "imgs/hseven2.jpeg"
 	},
 	{
 		name: "L6",
@@ -218,7 +218,7 @@ var tilesSet = [
 		val: 6,
 		rValue: 6,
 		pair: 12,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/L6.jpeg"
+		img: "imgs/L6.jpeg"
 	},
 	{
 		name: "L6",
@@ -227,7 +227,7 @@ var tilesSet = [
 		val: 6,
 		rValue: 6,
 		pair: 12,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/lsix2.jpeg"
+		img: "imgs/lsix2.jpeg"
 	},
 
 	//Mixed pairs
@@ -238,7 +238,7 @@ var tilesSet = [
 		val: 9,
 		rValue: 9,
 		pair: 13,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/R9.jpeg"
+		img: "imgs/R9.jpeg"
 	},
 	{
 		name: "W9",
@@ -247,7 +247,7 @@ var tilesSet = [
 		val: 9,
 		rValue: 9,
 		pair: 13,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/W9.jpeg"
+		img: "imgs/W9.jpeg"
 	},
 	{
 		name: "L8",
@@ -256,7 +256,7 @@ var tilesSet = [
 		val: 8,
 		rValue: 8,
 		pair: 14,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/L8.jpeg"
+		img: "imgs/L8.jpeg"
 	},
 	{
 		name: "WL8",
@@ -265,7 +265,7 @@ var tilesSet = [
 		val: 8,
 		rValue: 8,
 		pair: 14,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/L8(2).jpeg" //fixed wrong file name error.
+		img: "imgs/L8(2).jpeg" //fixed wrong file name error.
 	},
 	{
 		name: "R7",
@@ -274,7 +274,7 @@ var tilesSet = [
 		val: 7,
 		rValue: 7,
 		pair: 15,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/R7.jpeg"
+		img: "imgs/R7.jpeg"
 	},
 	{
 		name: "W7",
@@ -283,7 +283,7 @@ var tilesSet = [
 		val: 7,
 		rValue: 7,
 		pair: 15,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/W7.jpeg"
+		img: "imgs/W7.jpeg"
 	},
 	{
 		name: "R5",
@@ -292,7 +292,7 @@ var tilesSet = [
 		val: 5,
 		rValue: 5,
 		pair: 16,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/R5.jpeg"
+		img: "imgs/R5.jpeg"
 	},
 	{
 		name: "W5",
@@ -301,7 +301,7 @@ var tilesSet = [
 		val: 5,
 		rValue: 5,
 		pair: 16,
-		img: "file:///C:/Users/chris/CS/Tiles/imgs/W5.jpeg"
+		img: "imgs/W5.jpeg"
 	}
 ]
 
@@ -331,7 +331,11 @@ var card1 = document.getElementById("0");
 var card2 = document.getElementById("1");
 var card3 = document.getElementById("2");
 var card4 = document.getElementById("3");
-
+// returns the img src in the correct format that matches the obj's img attr, instead of the absolute path.
+var img1 = card1.getAttribute("src");
+var img2 = card2.getAttribute("src");
+var img3 = card3.getAttribute("src");
+var img4 = card4.getAttribute("src");
 
 var cards = [card1, card2, card3, card4];
 
@@ -356,6 +360,7 @@ random.addEventListener("click", function(){
 //houseway button. need work
 houseway.addEventListener("click", function(){
 	checkPair();
+	checkTeen();
 })
 
 
@@ -410,4 +415,21 @@ function reset() {
 		tilesSet.push(master[i]);
 	}
 	duplicatePair =[0, 0, 0, 0];
+}
+
+function checkTeen() {
+	for(var i = 0; i < 4; i++) {
+		for (var ii = 0; ii < 4; ii++) {
+			//if there is T/D with a 7
+			if (hand[i].val === 2 && hand[ii].val === 7) {
+				console.log("9");
+			}
+			else if (hand[i].val === 2 && hand[ii].val === 8) {
+				console.log("gong");
+			}
+			else if (hand[i].val === 2 && hand[ii].val === 9) {
+				console.log("wong");
+			}
+		}
+	}
 }
