@@ -9,8 +9,8 @@ var tilesSet = [
 		pairRank: 1, //pair rank
 
 		// need fix
-		val: 36,
-		realValue: 36,
+		val: [3, 6],
+		realValue: [3, 6],
 
 		pair: 1, //its pair has the same value
 		split: [7, 9],
@@ -23,8 +23,8 @@ var tilesSet = [
 		pairRank: 1,
 
 		//need fix
-		val: 36,
-		realValue: 36,
+		val: [3, 6],
+		realValue: [3, 6],
 
 		pair: 1,
 		split: [7, 9],
@@ -37,7 +37,7 @@ var tilesSet = [
 		val: 2,
 		realValue: 12,
 		pair: 2,
-		split: [7, 9, 3, "wong"],
+		split: [[6, 8], [3, 90]],
 		img: "imgs/Teen1.jpeg"
 	},
 	{
@@ -47,7 +47,7 @@ var tilesSet = [
 		val: 2,
 		realValue: 12,
 		pair: 2,
-		split: [7, 9, 3, "wong"],
+		split: [[6, 8], [3, 90]],
 		img: "imgs/Teen2.jpeg"
 	},
 	{
@@ -57,7 +57,7 @@ var tilesSet = [
 		val: 2,
 		realValue: 12,
 		pair: 3,
-		split: [7, 9, 3, "wong"],
+		split: [[6, 8], [3, 90]],
 		img: "imgs/Dey1.jpeg"
 	},
 	{
@@ -67,7 +67,7 @@ var tilesSet = [
 		val: 2,
 		realValue: 12,
 		pair: 3,
-		split: [7, 9, 3, "wong"],
+		split: [[6, 8], [3, 90]],
 		img: "imgs/dey2.jpeg"
 	},
 	{
@@ -390,11 +390,13 @@ var duplicatePair = [0, 0, 0, 0];
 
 
 
+
+
+
+//==================================================
 //initialize game
+
 newHand();
-
-
-
 
 //random button
 random.addEventListener("click", function(){
@@ -405,12 +407,18 @@ random.addEventListener("click", function(){
 
 //houseway button. need work
 houseway.addEventListener("click", function(){
-	checkPair();
+	
+	//just for error checking. temp format
+	if(checkPair()){
+		console.log("pairs checked.");
+		return true;
+	};
 	checkTeen();
 
 })
 
-
+//======================================================
+//
 
 
 
@@ -425,19 +433,26 @@ function newHand() {
 		//changes the src to a random tiles src from imgs folder  
 		cards[i].src = tilesSet[index].img;
 		hand[i] = tilesSet[index];
+		//used to reset hand array after separating into low and high.
+		masterHand.push(hand[i]);
 		// splices the selected array, so there won't be the same 4 tiles. always a new tile.
 		tilesSet.splice(index, 1);
 	}	
 }
 
 
+//baccarat counting
+function baccaratCount(n, m) {
+	var number = n + m;
+	if (number >= 10 && number <= 20){
+		number = number - 10;
+		return number;
+	}
+}
+
+
 //check for pairs
 function checkPair() {
-	//used to reset hand array after separating into low and high.
-	for (var i = 0; i < hand.length; i++) {
-	masterHand.push(hand[i]);
-	}
-
 	//loops through each hand
 	for(var i = 0; i < hand.length; i++) {
 		//compares each hand to i
@@ -451,11 +466,47 @@ function checkPair() {
 					if (hand[i].split != false) {
 						console.log("split on " + hand[i].split);
 						answer.textContent = "pair of " + hand[i].name;
+
+						//separates pairs and the remaining tiles into high and low.
+						high.push(hand[i]);
+						high.push(hand[ii]);
+						hand.splice(i, 1);
+						if (hand.length == 3) {
+							for (var i = 0; i < hand.length; i++){
+								if(hand[i].pair == high[0].pair){
+									//deletes the second pair
+									hand.splice(i, 1);
+									//sends the result(remaining tile pairs) into a new array low.
+									low = hand;
+								}
+							}
+						}
+
+						//split decision
+
+						//Gee Joon
+
+						// teen/dey. separated since they have the 3/wong split as well[[6, 8], [3, 90]].
+
+						// all other pairs. split pairs are in one array with a length of 2. ex: [7, 9]
+						var high1 = high[0].split[0];
+
+						var combo1 = baccaratCount(high[0].val, low[0].val);
+						var combo2 = baccaratCount(high[0].val, low[1].val);
+
+						if(combo1 >= high1 && combo2 >= high1){
+							moveTiles("split");
+						} else {
+							moveTiles();
+						}
+
+						return true;
+
 					//If the pair doesn't split... (.split = false)
 					} else {
 						if (duplicatePair[i] === 0 && duplicatePair[ii] === 0) {
-							//function to handle no split pairs.
-							dontSplit(i, ii);
+							//execute this function, then return its return value
+							return dontSplit(i, ii);
 						}
 					}
 				}
@@ -464,14 +515,16 @@ function checkPair() {
 	}
 }
 
+
 function dontSplit(n, n2) {
 	answer.textContent = "never split the pair of " + hand[n].name;
-	//pushes pair tiles into a new array.
+	//pushes 7 with T/D into a new array.
 	high.push(hand[n]);
 	high.push(hand[n2]);
-	//deletes one of the pairs.
+	//deletes either 7 or T/D
 	hand.splice(n, 1);
 	//if one is already deleted.
+	//mainly used to correctly match array with i since hand.length changes after splice.
 	if (hand.length == 3) {
 		for (var i = 0; i < hand.length; i++){
 			if(hand[i].pair == high[0].pair){
@@ -479,16 +532,62 @@ function dontSplit(n, n2) {
 				hand.splice(i, 1);
 				//sends the result(remaining tile pairs) into a new array low.
 				low = hand;
-				cards[0].src = low[0].img;
-				cards[1].src = low[1].img;
-				cards[2].src = high[0].img;
-				cards[3].src = high[1].img;
+				moveTiles();
+				return true;
 			}
 		}
 	}	
 }
 
 
+
+//console error message when there are T/D with 7 and other 7s or 8 and 9.
+//
+// tiles.js:555 Uncaught TypeError: Cannot read property 'val' of undefined
+//     at checkTeen (tiles.js:555)
+//     at HTMLButtonElement.<anonymous> (tiles.js:414)
+// checkTeen @ tiles.js:555
+// (anonymous) @ tiles.js:414
+
+
+function checkTeen() {
+	//look at dontSplit() for similar logic/explanation.
+	for(var i = 0; i < hand.length; i++) {
+		for (var ii = 0; ii < hand.length; ii++) {
+			//can't access after splicing
+			if (hand.length == 4){
+				//if there is T/D with a 7
+				if (hand[i].val === 2 && hand[ii].val === 7) {
+					high.push(hand[i]);
+					high.push(hand[ii]);
+					hand.splice(i, 1);
+
+					if (hand.length == 3) {
+						for (var i = 0; i < hand.length; i++){
+							//if we deleted a 7...(since the tile we deleted was added to high[])
+							if(high[0].val == 7){
+								if(hand[i].val == 2) {
+									//deletes the T/D
+									hand.splice(i, 1);
+									//sends the result(remaining tiles) into a new array low.
+									low = hand;
+									moveTiles();
+								}
+							} else if (high[0].val == 2){
+								if(hand[i].val == 7) {
+									//deletes the second pair
+									hand.splice(i, 1);
+									low = hand;
+									moveTiles();
+								}
+								}
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
 function reset() {
 
@@ -502,19 +601,17 @@ function reset() {
 	high = [];
 }
 
-function checkTeen() {
-	for(var i = 0; i < hand.length; i++) {
-		for (var ii = 0; ii < hand.length; ii++) {
-			//if there is T/D with a 7
-			if (hand[i].val === 2 && hand[ii].val === 7) {
-				answer.textContent = "/9";
-			}
-			else if (hand[i].val === 2 && hand[ii].val === 8) {
-				answer.textContent = "/gong";
-			}
-			else if (hand[i].val === 2 && hand[ii].val === 9) {
-				answer.textContent = "/wong";
-			}
-		}
+//moves the tiles visually on the webpage
+function moveTiles(x) {
+	if (x === "split"){
+		cards[0].src = low[0].img;
+		cards[1].src = high[0].img;
+		cards[2].src = low[1].img;
+		cards[3].src = high[1].img;
+	} else {
+	cards[0].src = low[0].img;
+	cards[1].src = low[1].img;
+	cards[2].src = high[0].img;
+	cards[3].src = high[1].img;
 	}
 }
