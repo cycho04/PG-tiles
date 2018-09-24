@@ -7,25 +7,18 @@ var tilesSet = [
 		name: "GJ3",
 		rank: 16, //individual tile rank
 		pairRank: 1, //pair rank
-
-		// need fix
 		val: [3, 6],
 		realValue: [3, 6],
-
 		pair: 1, //its pair has the same value
 		split: [7, 9],
-
 		img: "imgs/GeeJoon3.jpeg" //imgs in a folder in same directory
 	},
 	{
 		name: "GJ6",
 		rank: 16,
 		pairRank: 1,
-
-		//need fix
 		val: [3, 6],
 		realValue: [3, 6],
-
 		pair: 1,
 		split: [7, 9],
 		img: "imgs/GeeJoon6.jpeg"
@@ -338,10 +331,6 @@ var tilesSet = [
 	}
 ]
 
-
-
-
-
 //-----------------------------------------------------------
 //							LOGIC
 //-----------------------------------------------------------
@@ -349,8 +338,6 @@ var tilesSet = [
 // each hand holds their respective tile's object.
 //placed inside an array for easy loop access.
 var hand = [];
-
-
 //master copy of tiles array. refer to this when resetting array
 var master = [];
 for (var i = 0; i < tilesSet.length; i++) {
@@ -359,10 +346,6 @@ for (var i = 0; i < tilesSet.length; i++) {
 
 //used to reset hand  after separating into low and high
 var masterHand = [];
-
-
-
-
 
 var random = document.getElementById("random");
 var houseway = document.getElementById("houseway");
@@ -373,30 +356,20 @@ var card2 = document.getElementById("1");
 var card3 = document.getElementById("2");
 var card4 = document.getElementById("3");
 var cards = [card1, card2, card3, card4];
-
-
 //low and high hands
 var low = [];
 var high = [];
-
-
 //selects the h1 that holds the answer
 var answer = document.getElementById("answerDisplay");
-
-
 //Used to see if pair is recognized. eliminates duplicate pair identification.
 //stores the obj's .pair(unique to each pair) houseway button
 var duplicatePair = [0, 0, 0, 0];
 
-
-
-
-
-
 //==================================================
 //initialize game
-
 newHand();
+
+
 
 //random button
 random.addEventListener("click", function(){
@@ -407,23 +380,11 @@ random.addEventListener("click", function(){
 
 //houseway button. need work
 houseway.addEventListener("click", function(){
-	
-	//just for error checking. temp format
-	if(checkPair()){
-		console.log("pairs checked.");
-		return true;
-	};
+	checkPair();
 	checkTeen();
-
 })
 
 //======================================================
-//
-
-
-
-
-
 
 //generates new hand
 function newHand() {
@@ -447,6 +408,8 @@ function baccaratCount(n, m) {
 	if (number >= 10 && number <= 20){
 		number = number - 10;
 		return number;
+	} else {
+		return number;
 	}
 }
 
@@ -464,49 +427,12 @@ function checkPair() {
 
 					//if we split this pair...
 					if (hand[i].split != false) {
-						console.log("split on " + hand[i].split);
-						answer.textContent = "pair of " + hand[i].name;
-
-						//separates pairs and the remaining tiles into high and low.
-						high.push(hand[i]);
-						high.push(hand[ii]);
-						hand.splice(i, 1);
-						if (hand.length == 3) {
-							for (var i = 0; i < hand.length; i++){
-								if(hand[i].pair == high[0].pair){
-									//deletes the second pair
-									hand.splice(i, 1);
-									//sends the result(remaining tile pairs) into a new array low.
-									low = hand;
-								}
-							}
-						}
-
-						//split decision
-
-						//Gee Joon
-
-						// teen/dey. separated since they have the 3/wong split as well[[6, 8], [3, 90]].
-
-						// all other pairs. split pairs are in one array with a length of 2. ex: [7, 9]
-						var high1 = high[0].split[0];
-
-						var combo1 = baccaratCount(high[0].val, low[0].val);
-						var combo2 = baccaratCount(high[0].val, low[1].val);
-
-						if(combo1 >= high1 && combo2 >= high1){
-							moveTiles("split");
-						} else {
-							moveTiles();
-						}
-
-						return true;
-
+						split(i, ii);
 					//If the pair doesn't split... (.split = false)
 					} else {
 						if (duplicatePair[i] === 0 && duplicatePair[ii] === 0) {
 							//execute this function, then return its return value
-							return dontSplit(i, ii);
+							dontSplit(i, ii);
 						}
 					}
 				}
@@ -516,8 +442,91 @@ function checkPair() {
 }
 
 
+function split(n, n2) {
+	//separates pairs and the remaining tiles into high and low.
+	high.push(hand[n]);
+	high.push(hand[n2]);
+	hand.splice(n, 1);
+	if (hand.length == 3) {
+		for (var i = 0; i < hand.length; i++){
+			if(hand[i].pair == high[0].pair){
+				//deletes the second pair
+				hand.splice(i, 1);
+				//sends the result(remaining tile pairs) into a new array low.
+				low = hand;
+			}
+		}
+	}
+	//split decision
+	//Gee Joon
+	if (high[0].pair === 1) {
+		//one of the pair tiles with the other tiles.
+		var combo1 = baccaratCount(high[0].val[0], low[0].val);
+		var combo2 = baccaratCount(high[0].val[0], low[1].val);
+		//if it meets the split requirements...
+		if((combo1 >= 7 && combo2 >= 9) || (combo1 >= 9 && combo2 >= 7)){
+			moveTiles("split");
+			return true;
+		} else {
+			moveTiles();
+			return
+		}
+	//Teen/Dey
+	} else if(high[0].val === 2) {
+		var combo1 = baccaratCount(high[0].val, low[0].val);
+		var combo2 = baccaratCount(high[0].val, low[1].val);
+		//checks if any of the tiles are 7,8, or 9. for 9 gong and wong.
+		var check7_9 = low[0].val >= 7 && low[0].val <= 9;
+		var check7_9_2 = low[1].val >= 7 && low[1].val <= 9;
+		//regular 6-8 split rule.
+		if((combo1 >= 6 && combo2 >= 8) || (combo1 >= 8 && combo2 >= 6)){
+			moveTiles("split");
+			return true;
+			//we might have 7,8,9 with T/D. (with 8 and 9, it turns to 0 and 1, so we need this part.)
+		} else if (check7_9 === true || check7_9_2 === true){
+			//if both are 7,8, or 9
+			if (check7_9 === check7_9_2){
+				moveTiles("split");
+				return true;
+				//only if 1..
+			} else if (check7_9 === true && check7_9_2 === false){
+				if (low[1].val >= 3 && low[1].val <=6){
+					moveTiles("split");
+					return true;
+				} else {
+					moveTiles();
+					return true;
+				}
+				//if other one...
+			} else{
+				if (low[0].val >= 3 && low[0].val <=6){
+					moveTiles("split");
+					return true;
+				} else {
+					moveTiles();
+					return true;
+				}
+			}
+		//does not split.
+		} else {
+			moveTiles();
+			return;
+	}
+	} else {
+		// all other pairs. split pairs are in one array with a length of 2. ex: [7, 9]
+		var high1 = high[0].split[0];
+		var combo1 = baccaratCount(high[0].val, low[0].val);
+		var combo2 = baccaratCount(high[0].val, low[1].val);
+		if(combo1 >= high1 && combo2 >= high1){
+			moveTiles("split");
+		} else {
+			moveTiles();
+		}
+		return true;
+	}
+}
+
 function dontSplit(n, n2) {
-	answer.textContent = "never split the pair of " + hand[n].name;
 	//pushes 7 with T/D into a new array.
 	high.push(hand[n]);
 	high.push(hand[n2]);
@@ -603,7 +612,7 @@ function reset() {
 
 //moves the tiles visually on the webpage
 function moveTiles(x) {
-	if (x === "split"){
+	if (x == "split"){
 		cards[0].src = low[0].img;
 		cards[1].src = high[0].img;
 		cards[2].src = low[1].img;
