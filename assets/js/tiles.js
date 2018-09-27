@@ -61,7 +61,7 @@ var tilesSet = [
 		realValue: 12,
 		pair: 3,
 		split: [[6, 8], [3, 90]],
-		img: "imgs/dey2.jpeg"
+		img: "imgs/Dey2.jpeg"
 	},
 	{
 		name: "H8",
@@ -380,8 +380,10 @@ random.addEventListener("click", function(){
 
 //houseway button. need work
 houseway.addEventListener("click", function(){
+	//add logic to decide when to call certain functions. eg no need to call all func if no split pair.
 	checkPair();
 	checkTeen();
+	hiLow();
 })
 
 //======================================================
@@ -424,7 +426,6 @@ function checkPair() {
 			if (hand[i].pair === hand[ii].pair && i != ii) {
 				//if this pair hasn't already been recognized and processed.
 				if (duplicatePair[i] === 0 && duplicatePair[ii] === 0) {
-
 					//if we split this pair...
 					if (hand[i].split != false) {
 						split(i, ii);
@@ -549,7 +550,6 @@ function dontSplit(n, n2) {
 }
 
 
-
 //console error message when there are T/D with 7 and other 7s or 8 and 9.
 //
 // tiles.js:555 Uncaught TypeError: Cannot read property 'val' of undefined
@@ -557,7 +557,6 @@ function dontSplit(n, n2) {
 //     at HTMLButtonElement.<anonymous> (tiles.js:414)
 // checkTeen @ tiles.js:555
 // (anonymous) @ tiles.js:414
-
 
 function checkTeen() {
 	//look at dontSplit() for similar logic/explanation.
@@ -597,6 +596,36 @@ function checkTeen() {
 		}
 	}
 }
+
+
+function hiLow(){
+	//switch placeholders
+	var switch1 = "";
+	var switch2 = "";
+	//starts from [0] and applies the switch 4 times(first forloop does)
+	for(var i = 0; i < hand.length; i++){
+		for(var ii = 0; ii < hand.length; ii++) {
+			//if it is not the last tile
+			if(ii != hand.length - 1) {
+				//compares the current tile its neighbor. if the current is bigger, switch with neighbor.
+				if(hand[ii].realValue > hand[ii+1].realValue){
+					switch1 = hand[ii];
+					switch2 = hand[ii+1];
+					hand[ii] = switch2;
+					hand[ii+1] = switch1;
+				}
+			}
+		}
+	}
+	//fix later.
+	cards[0].src = hand[0].img;
+	cards[1].src = hand[3].img;
+	cards[2].src = hand[1].img;
+	cards[3].src = hand[2].img;
+
+}
+
+
 
 function reset() {
 
