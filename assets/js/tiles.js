@@ -381,9 +381,13 @@ random.addEventListener("click", function(){
 //houseway button. need work
 houseway.addEventListener("click", function(){
 	//add logic to decide when to call certain functions. eg no need to call all func if no split pair.
-	checkPair();
-	checkTeen();
-	hiLow();
+	if(!checkPair()){
+		if(!checkTeen()){
+			if(!checkBB()){
+				hiLow();
+			}
+		}
+	}
 })
 
 //======================================================
@@ -429,11 +433,13 @@ function checkPair() {
 					//if we split this pair...
 					if (hand[i].split != false) {
 						split(i, ii);
+						return true;
 					//If the pair doesn't split... (.split = false)
 					} else {
 						if (duplicatePair[i] === 0 && duplicatePair[ii] === 0) {
 							//execute this function, then return its return value
 							dontSplit(i, ii);
+							return true;
 						}
 					}
 				}
@@ -580,6 +586,7 @@ function checkTeen() {
 									//sends the result(remaining tiles) into a new array low.
 									low = hand;
 									moveTiles();
+									return true;
 								}
 							} else if (high[0].val == 2){
 								if(hand[i].val == 7) {
@@ -587,6 +594,7 @@ function checkTeen() {
 									hand.splice(i, 1);
 									low = hand;
 									moveTiles();
+									return true;
 								}
 								}
 						}
@@ -622,9 +630,73 @@ function hiLow(){
 	cards[1].src = hand[3].img;
 	cards[2].src = hand[1].img;
 	cards[3].src = hand[2].img;
-
 }
 
+//messy and redundant with the hiLow func. dry up later.
+//babies rule
+function checkBB(){
+	//places the tiles in ascending order
+	var switch1 = "";
+	var switch2 = "";
+	//starts from [0] and applies the switch 4 times(first forloop does)
+	for(var i = 0; i < hand.length; i++){
+		for(var ii = 0; ii < hand.length; ii++) {
+			//if it is not the last tile
+			if(ii != hand.length - 1) {
+				//compares the current tile its neighbor. if the current is bigger, switch with neighbor.
+				if(hand[ii].realValue > hand[ii+1].realValue){
+					switch1 = hand[ii];
+					switch2 = hand[ii+1];
+					hand[ii] = switch2;
+					hand[ii+1] = switch1;
+				}
+			}
+		}
+	}
+	//counts the types of tiles in hand[]
+	var baby = 0;
+	var number =0;
+	var big = 0;
+
+	 for(var i = 0; i < hand.length; i++){
+	 	//if its a baby (not including 6 as a baby)
+	 	if (hand[i].realValue <= 5){
+	 		baby += 1;
+	 	}
+	 	//if its a big tile
+	 	else if (hand[i].realValue >= 10){
+	 		big += 1;
+	 	}
+	 	//only temporary, due to incomplete GJ value. change to a simple else once it is resolved.
+	 	else if (hand[i].realValue > 5 && hand[i].realValue < 10) {
+	 		number += 1;
+	 	}
+	 }
+	 //if we have 2 babies and 2 numbers
+	 if(baby == 2 && number == 2){
+	 	cards[0].src = hand[0].img;
+		cards[1].src = hand[1].img;
+		cards[2].src = hand[2].img;
+		cards[3].src = hand[3].img;
+		return true;
+	 }
+	 //2 babies and 1 big and 1 number
+	 else if(baby == 2 && number == big){
+	 	cards[0].src = hand[0].img;
+		cards[1].src = hand[1].img;
+		cards[2].src = hand[2].img;
+		cards[3].src = hand[3].img;
+		return true;
+	 }
+	 //if we have 2 babies and 2 big 
+	 else if(baby == 2 && big == 2){
+	 	cards[0].src = hand[0].img;
+		cards[1].src = hand[3].img;
+		cards[2].src = hand[1].img;
+		cards[3].src = hand[2].img;
+		return true;
+	 }
+}
 
 
 function reset() {
