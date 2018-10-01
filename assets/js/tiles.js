@@ -556,50 +556,76 @@ function dontSplit(n, n2) {
 }
 
 
-//console error message when there are T/D with 7 and other 7s or 8 and 9.
-//
-// tiles.js:555 Uncaught TypeError: Cannot read property 'val' of undefined
-//     at checkTeen (tiles.js:555)
-//     at HTMLButtonElement.<anonymous> (tiles.js:414)
-// checkTeen @ tiles.js:555
-// (anonymous) @ tiles.js:414
-
 function checkTeen() {
-	//look at dontSplit() for similar logic/explanation.
+	//check to see how many 7,8,or9. then stores their array index values for access later
+	var is7 = 0;
+	var index7 = "";
+	var is8 = 0;
+	var index8 = "";
+	var is9 = 0;
+	var index9 = "";
+	//increments 1 per 7,8,9 respectively.
+	for(var i = 0; i < hand.length; i++) {
+		if(hand[i].val == 7){
+			is7++;
+			index7 = i;
+		}
+		else if(hand[i].val == 8){
+			is8++;
+			index8 = i;
+		}
+		else if(hand[i].val == 9){
+			is9++;
+			index9 = i;
+		}
+	}
 	for(var i = 0; i < hand.length; i++) {
 		for (var ii = 0; ii < hand.length; ii++) {
 			//can't access after splicing
 			if (hand.length == 4){
-				//if there is T/D with a 7
-				if (hand[i].val === 2 && hand[ii].val === 7) {
-					high.push(hand[i]);
-					high.push(hand[ii]);
-					hand.splice(i, 1);
 
-					if (hand.length == 3) {
-						for (var i = 0; i < hand.length; i++){
-							//if we deleted a 7...(since the tile we deleted was added to high[])
-							if(high[0].val == 7){
-								if(hand[i].val == 2) {
-									//deletes the T/D
-									hand.splice(i, 1);
-									//sends the result(remaining tiles) into a new array low.
-									low = hand;
-									moveTiles();
-									return true;
-								}
-							} else if (high[0].val == 2){
-								if(hand[i].val == 7) {
-									//deletes the second pair
-									hand.splice(i, 1);
-									low = hand;
-									moveTiles();
-									return true;
-								}
-								}
-						}
+
+
+				//works when only 1 of 7,8, or 9
+				//need fix for when there are two or more.
+
+
+
+				//not finished.
+				//Teen/Dey with 9
+				if (hand[i].val === 2 && hand[ii].val === 9) {
+					//if no 7 or 8
+					if(is7 == 0 && is8 == 0){
+						check789(i, ii, 9);
+						return true;
+					}
+					if(is7 > 0){
+						check789(i, index7, 7);
+						return true;
+					}				
+					if(is8 > 0){
+						check789(i, index8, 8);
+						return true;
 					}
 				}
+				//Teen/Dey with 8
+				else if (hand[i].val === 2 && hand[ii].val === 8) {
+					if(is7 == 0 && is9 == 0){
+						check789(i, ii, 8);
+						return true;
+					}
+				}
+				//Teen/Dey with 7
+				else if (hand[i].val === 2 && hand[ii].val === 7) {
+					if(is9 == 0 && is8 == 0){
+						check789(i, ii, 7);
+						return true;
+					}
+				}
+			}
+			//prevents from multiple hw clicks on same hand, else error.(try taking it off and running on console.)
+			else {
+				return true;
 			}
 		}
 	}
@@ -723,5 +749,37 @@ function moveTiles(x) {
 	cards[1].src = low[1].img;
 	cards[2].src = high[0].img;
 	cards[3].src = high[1].img;
+	}
+}
+
+//need fix. might not need this later. 
+//used to identify either 7,8,9 then move the tiles accordingly.
+function check789 (i, ii, n) {
+	high.push(hand[i]);
+	high.push(hand[ii]);
+	hand.splice(i, 1);
+	if (hand.length == 3) {
+		for (var i = 0; i < hand.length; i++){
+			//if we deleted a 7...(since the tile we deleted was added to high[])
+			if(high[0].val == n){
+				if(hand[i].val == 2) {
+					//deletes the T/D
+					hand.splice(i, 1);
+					//sends the result(remaining tiles) into a new array low.
+					low = hand;
+					moveTiles();
+					return true;
+				}
+			} 
+			else if (high[0].val == 2){
+				if(hand[i].val == n) {
+					//deletes the second pair
+					hand.splice(i, 1);
+					low = hand;
+					moveTiles();
+					return true;
+				}
+			}
+		}
 	}
 }
