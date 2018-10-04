@@ -557,78 +557,7 @@ function dontSplit(n, n2) {
 
 
 function checkTeen() {
-	//check to see how many 7,8,or9. then stores their array index values for access later
-	var is7 = 0;
-	var index7 = "";
-	var is8 = 0;
-	var index8 = "";
-	var is9 = 0;
-	var index9 = "";
-	//increments 1 per 7,8,9 respectively.
-	for(var i = 0; i < hand.length; i++) {
-		if(hand[i].val == 7){
-			is7++;
-			index7 = i;
-		}
-		else if(hand[i].val == 8){
-			is8++;
-			index8 = i;
-		}
-		else if(hand[i].val == 9){
-			is9++;
-			index9 = i;
-		}
-	}
-	for(var i = 0; i < hand.length; i++) {
-		for (var ii = 0; ii < hand.length; ii++) {
-			//can't access after splicing
-			if (hand.length == 4){
-
-
-
-				//works when only 1 of 7,8, or 9
-				//need fix for when there are two or more.
-
-
-
-				//not finished.
-				//Teen/Dey with 9
-				if (hand[i].val === 2 && hand[ii].val === 9) {
-					//if no 7 or 8
-					if(is7 == 0 && is8 == 0){
-						check789(i, ii, 9);
-						return true;
-					}
-					if(is7 > 0){
-						check789(i, index7, 7);
-						return true;
-					}				
-					if(is8 > 0){
-						check789(i, index8, 8);
-						return true;
-					}
-				}
-				//Teen/Dey with 8
-				else if (hand[i].val === 2 && hand[ii].val === 8) {
-					if(is7 == 0 && is9 == 0){
-						check789(i, ii, 8);
-						return true;
-					}
-				}
-				//Teen/Dey with 7
-				else if (hand[i].val === 2 && hand[ii].val === 7) {
-					if(is9 == 0 && is8 == 0){
-						check789(i, ii, 7);
-						return true;
-					}
-				}
-			}
-			//prevents from multiple hw clicks on same hand, else error.(try taking it off and running on console.)
-			else {
-				return true;
-			}
-		}
-	}
+	return false;
 }
 
 
