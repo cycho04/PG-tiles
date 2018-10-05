@@ -382,11 +382,14 @@ random.addEventListener("click", function(){
 houseway.addEventListener("click", function(){
 	//add logic to decide when to call certain functions. eg no need to call all func if no split pair.
 	if(!checkPair()){
-		if(!checkTeen()){
-			if(!checkBB()){
-				hiLow();
+		if(!exceptions()){
+			if(!checkTeen()){
+				if(!checkBB()){
+					hiLow();
+				}
 			}
 		}
+		
 	}
 })
 
@@ -405,6 +408,11 @@ function newHand() {
 		// splices the selected array, so there won't be the same 4 tiles. always a new tile.
 		tilesSet.splice(index, 1);
 	}	
+}
+
+const exceptions = () => {
+	//check for exeptions.
+	return false;
 }
 
 
