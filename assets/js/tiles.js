@@ -373,6 +373,7 @@ newHand();
 
 //random button
 random.addEventListener("click", function(){
+	enable(houseway); //resets the houseway button after disabling it.
 	newHand();
 	reset();
 })
@@ -388,9 +389,9 @@ houseway.addEventListener("click", function(){
 					hiLow();
 				}
 			}
-		}
-		
+		}	
 	}
+	disable(houseway); //disables hw button after one click.
 })
 
 //======================================================
@@ -410,17 +411,32 @@ function newHand() {
 	}	
 }
 
+//disables hw btn
+const disable = (btn) => {
+	btn.disabled = true;
+}
+// enables hw btn
+const enable = (btn) => {
+	btn.disabled = false;
+}
+
+
+//need work.
 const exceptions = () => {
 	//check for exeptions.
+
 	return false;
 }
 
 
 //baccarat counting
-function baccaratCount(n, m) {
-	var number = n + m;
-	if (number >= 10 && number <= 20){
-		number = number - 10;
+const baccaratCount = (n, m) => {
+	let number = n + m;
+	if (number >= 10 && number < 20){
+		number -= 10;
+		return number;
+	} else if (number >= 20) {
+		number -= 20;
 		return number;
 	} else {
 		return number;
