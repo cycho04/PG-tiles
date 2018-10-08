@@ -347,29 +347,25 @@ for (var i = 0; i < tilesSet.length; i++) {
 //used to reset hand  after separating into low and high
 var masterHand = [];
 
-var random = document.getElementById("random");
-var houseway = document.getElementById("houseway");
+const random = document.getElementById("random");
+const houseway = document.getElementById("houseway");
 
 //selects each hand and retrieves their html code
-var card1 = document.getElementById("0");
-var card2 = document.getElementById("1");
-var card3 = document.getElementById("2");
-var card4 = document.getElementById("3");
-var cards = [card1, card2, card3, card4];
+const card1 = document.getElementById("0");
+const card2 = document.getElementById("1");
+const card3 = document.getElementById("2");
+const card4 = document.getElementById("3");
+const cards = [card1, card2, card3, card4];
 //low and high hands
 var low = [];
 var high = [];
 //selects the h1 that holds the answer
 var answer = document.getElementById("answerDisplay");
-//Used to see if pair is recognized. eliminates duplicate pair identification.
-//stores the obj's .pair(unique to each pair) houseway button
-var duplicatePair = [0, 0, 0, 0];
 
-//==================================================
+
+//==================================================================================================================
 //initialize game
 newHand();
-
-
 
 //random button
 random.addEventListener("click", function(){
@@ -378,12 +374,11 @@ random.addEventListener("click", function(){
 	reset();
 })
 
-
-//houseway button. need work
+//houseway button
 houseway.addEventListener("click", function(){
 	//add logic to decide when to call certain functions. eg no need to call all func if no split pair.
 	if(!checkPair()){
-		if(!exceptions()){
+		if(!exceptions(hand)){
 			if(!checkTeen()){
 				if(!checkBB()){
 					hiLow();
@@ -394,13 +389,13 @@ houseway.addEventListener("click", function(){
 	disable(houseway); //disables hw button after one click.
 })
 
-//======================================================
+//==================================================================================================================
+
 
 //generates new hand
 function newHand() {
-
-	for(var i = 0; i < 4; i++){
-		var index = Math.floor(Math.random()* tilesSet.length); 
+	for(let i = 0; i < 4; i++){
+		let index = Math.floor(Math.random()* tilesSet.length); 
 		//changes the src to a random tiles src from imgs folder  
 		cards[i].src = tilesSet[index].img;
 		hand[i] = tilesSet[index];
@@ -415,80 +410,88 @@ function newHand() {
 const disable = (btn) => {
 	btn.disabled = true;
 }
+
 // enables hw btn
 const enable = (btn) => {
 	btn.disabled = false;
 }
 
-
 //need work.
-const exceptions = () => {
-	//check for exeptions.
-
+const exceptions = (hand) => {
+	
 	return false;
 }
-
 
 //baccarat counting
 const baccaratCount = (n, m) => {
 	let number = n + m;
 	if (number >= 10 && number < 20){
-		number -= 10;
-		return number;
-	} else if (number >= 20) {
-		number -= 20;
-		return number;
-	} else {
+		return number -= 10;
+	} 
+	else if (number >= 20) {
+		return number -= 20;
+	} 
+	else {
 		return number;
 	}
 }
 
+function whichGJ() {
+	return false;
+}
 
 //check for pairs
 function checkPair() {
 	//loops through each hand
-	for(var i = 0; i < hand.length; i++) {
-		//compares each hand to i
-		for (var ii = 0; ii < hand.length; ii++) {
+	for(let i = 0; i < hand.length; i++) {
+		//compares i to ii
+		for (let ii = 0; ii < hand.length; ii++) {
 			// if there is a pair and its not comparing to itself.
 			if (hand[i].pair === hand[ii].pair && i != ii) {
-				//if this pair hasn't already been recognized and processed.
-				if (duplicatePair[i] === 0 && duplicatePair[ii] === 0) {
-					//if we split this pair...
-					if (hand[i].split != false) {
-						split(i, ii);
-						return true;
-					//If the pair doesn't split... (.split = false)
-					} else {
-						if (duplicatePair[i] === 0 && duplicatePair[ii] === 0) {
-							//execute this function, then return its return value
-							dontSplit(i, ii);
-							return true;
-						}
-					}
+				//if we split this pair...
+				if (hand[i].split != false) {
+					split(i, ii);
+					return true;
+				}
+				else { 
+					dontSplit(i, ii);
+					return true;
 				}
 			}
 		}
 	}
+	return false; //no pairs
 }
 
-
-function split(n, n2) {
-	//separates pairs and the remaining tiles into high and low.
+const intoHighLow = (n, n2) => {
+	//pushes the pairs into high[].
 	high.push(hand[n]);
 	high.push(hand[n2]);
+	//deletes one
 	hand.splice(n, 1);
-	if (hand.length == 3) {
-		for (var i = 0; i < hand.length; i++){
-			if(hand[i].pair == high[0].pair){
-				//deletes the second pair
-				hand.splice(i, 1);
-				//sends the result(remaining tile pairs) into a new array low.
-				low = hand;
-			}
+	//search for 2nd pair's index since hand.length changes after splice above.
+	for (let i = 0; i < hand.length; i++){
+		if (hand[i].pair === high[0].pair){
+			//deletes the second pair
+			hand.splice(i, 1);
+			//sends remaining tile pairs into a new array low.
+			low.push(hand[0]);
+			low.push(hand[1]);
 		}
 	}
-	//split decision
+	return true;
+}
+
+function dontSplit(n, n2) {
+	intoHighLow(n, n2)
+	moveTiles();
+	return true;
+}
+
+function split(n, n2) {
+	//separates hand into high and low.
+	intoHighLow(n, n2);
+
 	//Gee Joon
 	if (high[0].pair === 1) {
 		//one of the pair tiles with the other tiles.
@@ -545,10 +548,9 @@ function split(n, n2) {
 	}
 	} else {
 		// all other pairs. split pairs are in one array with a length of 2. ex: [7, 9]
-		var high1 = high[0].split[0];
 		var combo1 = baccaratCount(high[0].val, low[0].val);
 		var combo2 = baccaratCount(high[0].val, low[1].val);
-		if(combo1 >= high1 && combo2 >= high1){
+		if(combo1 >= high[0].split[0] && combo2 >= high[0].split[0]){
 			moveTiles("split");
 		} else {
 			moveTiles();
@@ -557,38 +559,16 @@ function split(n, n2) {
 	}
 }
 
-function dontSplit(n, n2) {
-	//pushes 7 with T/D into a new array.
-	high.push(hand[n]);
-	high.push(hand[n2]);
-	//deletes either 7 or T/D
-	hand.splice(n, 1);
-	//if one is already deleted.
-	//mainly used to correctly match array with i since hand.length changes after splice.
-	if (hand.length == 3) {
-		for (var i = 0; i < hand.length; i++){
-			if(hand[i].pair == high[0].pair){
-				//deletes the second pair
-				hand.splice(i, 1);
-				//sends the result(remaining tile pairs) into a new array low.
-				low = hand;
-				moveTiles();
-				return true;
-			}
-		}
-	}	
-}
-
 
 function checkTeen() {
 	return false;
 }
 
 
-function hiLow(){
+const ascendingOrder = () => {
 	//switch placeholders
-	var switch1 = "";
-	var switch2 = "";
+	let switch1 = "";
+	let switch2 = "";
 	//starts from [0] and applies the switch 4 times(first forloop does)
 	for(var i = 0; i < hand.length; i++){
 		for(var ii = 0; ii < hand.length; ii++) {
@@ -604,135 +584,91 @@ function hiLow(){
 			}
 		}
 	}
-	//fix later.
-	cards[0].src = hand[0].img;
-	cards[1].src = hand[3].img;
-	cards[2].src = hand[1].img;
-	cards[3].src = hand[2].img;
 }
 
-//messy and redundant with the hiLow func. dry up later.
+function hiLow(){
+	ascendingOrder();
+	moveTiles("hilow");
+}
+
 //babies rule
 function checkBB(){
-	//places the tiles in ascending order
-	var switch1 = "";
-	var switch2 = "";
-	//starts from [0] and applies the switch 4 times(first forloop does)
-	for(var i = 0; i < hand.length; i++){
-		for(var ii = 0; ii < hand.length; ii++) {
-			//if it is not the last tile
-			if(ii != hand.length - 1) {
-				//compares the current tile its neighbor. if the current is bigger, switch with neighbor.
-				if(hand[ii].realValue > hand[ii+1].realValue){
-					switch1 = hand[ii];
-					switch2 = hand[ii+1];
-					hand[ii] = switch2;
-					hand[ii+1] = switch1;
-				}
-			}
+
+	ascendingOrder();
+	//counts the types of tiles in hand[]
+	let baby = 0;
+	let number =0;
+	let big = 0;
+
+	for(let i = 0; i < hand.length; i++){
+		//if its a baby (not including 6 as a baby)
+		if (hand[i].realValue <= 5){
+			baby += 1;
+		}
+		//if its a big tile
+		else if (hand[i].realValue >= 10){
+			big += 1;
+		}
+		//only temporary, due to incomplete GJ value. change to a simple else once it is resolved.
+		else if (hand[i].realValue > 5 && hand[i].realValue < 10) {
+			number += 1;
 		}
 	}
-	//counts the types of tiles in hand[]
-	var baby = 0;
-	var number =0;
-	var big = 0;
 
-	 for(var i = 0; i < hand.length; i++){
-	 	//if its a baby (not including 6 as a baby)
-	 	if (hand[i].realValue <= 5){
-	 		baby += 1;
-	 	}
-	 	//if its a big tile
-	 	else if (hand[i].realValue >= 10){
-	 		big += 1;
-	 	}
-	 	//only temporary, due to incomplete GJ value. change to a simple else once it is resolved.
-	 	else if (hand[i].realValue > 5 && hand[i].realValue < 10) {
-	 		number += 1;
-	 	}
-	 }
-	 //if we have 2 babies and 2 numbers
-	 if(baby == 2 && number == 2){
-	 	cards[0].src = hand[0].img;
-		cards[1].src = hand[1].img;
-		cards[2].src = hand[2].img;
-		cards[3].src = hand[3].img;
+	//if we have 2 babies and 2 numbers
+	if (baby == 2 && number == 2){
+		moveTiles("asIs");
 		return true;
-	 }
-	 //2 babies and 1 big and 1 number
-	 else if(baby == 2 && number == big){
-	 	cards[0].src = hand[0].img;
-		cards[1].src = hand[1].img;
-		cards[2].src = hand[2].img;
-		cards[3].src = hand[3].img;
+	}
+	//2 babies and 1 big and 1 number
+	else if (baby == 2 && number == big){
+		moveTiles("asIs");
 		return true;
-	 }
-	 //if we have 2 babies and 2 big 
-	 else if(baby == 2 && big == 2){
-	 	cards[0].src = hand[0].img;
-		cards[1].src = hand[3].img;
-		cards[2].src = hand[1].img;
-		cards[3].src = hand[2].img;
+	}
+	//if we have 2 babies and 2 big 
+	else if (baby == 2 && big == 2){
+		moveTiles("hilow");
 		return true;
-	 }
+	}
+
+	//need 3 babies rule
 }
 
 
 function reset() {
-
 	//resets tilesSet from master array. Even after splice, it now has full deck again.
 	tilesSet = [];
-	for (var i = 0; i < master.length; i++) {
+	for (let i = 0; i < master.length; i++) {
 		tilesSet.push(master[i]);
 	}
-	duplicatePair =[0, 0, 0, 0];
 	low = [];
 	high = [];
 }
 
 //moves the tiles visually on the webpage
 function moveTiles(x) {
-	if (x == "split"){
+	if (x === "split"){
 		cards[0].src = low[0].img;
 		cards[1].src = high[0].img;
 		cards[2].src = low[1].img;
 		cards[3].src = high[1].img;
-	} else {
+	}
+	else if (x === "hilow") {
+		cards[0].src = hand[0].img;
+		cards[1].src = hand[3].img;
+		cards[2].src = hand[1].img;
+		cards[3].src = hand[2].img;
+	} 
+	else if (x === "asIs") {
+		cards[0].src = hand[0].img;
+		cards[1].src = hand[1].img;
+		cards[2].src = hand[2].img;
+		cards[3].src = hand[3].img;
+	} 
+	else {
 	cards[0].src = low[0].img;
 	cards[1].src = low[1].img;
 	cards[2].src = high[0].img;
 	cards[3].src = high[1].img;
-	}
-}
-
-//need fix. might not need this later. 
-//used to identify either 7,8,9 then move the tiles accordingly.
-function check789 (i, ii, n) {
-	high.push(hand[i]);
-	high.push(hand[ii]);
-	hand.splice(i, 1);
-	if (hand.length == 3) {
-		for (var i = 0; i < hand.length; i++){
-			//if we deleted a 7...(since the tile we deleted was added to high[])
-			if(high[0].val == n){
-				if(hand[i].val == 2) {
-					//deletes the T/D
-					hand.splice(i, 1);
-					//sends the result(remaining tiles) into a new array low.
-					low = hand;
-					moveTiles();
-					return true;
-				}
-			} 
-			else if (high[0].val == 2){
-				if(hand[i].val == n) {
-					//deletes the second pair
-					hand.splice(i, 1);
-					low = hand;
-					moveTiles();
-					return true;
-				}
-			}
-		}
 	}
 }
