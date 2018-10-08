@@ -340,22 +340,21 @@ var tilesSet = [
 var hand = [];
 //master copy of tiles array. refer to this when resetting array
 var master = [];
-for (var i = 0; i < tilesSet.length; i++) {
+for (let i = 0; i < tilesSet.length; i++) {
 	master.push(tilesSet[i]);
 }
 
 //used to reset hand  after separating into low and high
 var masterHand = [];
 
-const random = document.getElementById("random");
-const houseway = document.getElementById("houseway");
-
-//selects each hand and retrieves their html code
-const card1 = document.getElementById("0");
-const card2 = document.getElementById("1");
-const card3 = document.getElementById("2");
-const card4 = document.getElementById("3");
-const cards = [card1, card2, card3, card4];
+const random = document.getElementById("random"),
+	  houseway = document.getElementById("houseway"),
+	  //selects each hand and retrieves their html code
+	  card1 = document.getElementById("0"),
+	  card2 = document.getElementById("1"),
+	  card3 = document.getElementById("2"),
+	  card4 = document.getElementById("3"),
+	  cards = [card1, card2, card3, card4];
 //low and high hands
 var low = [];
 var high = [];
@@ -372,6 +371,11 @@ random.addEventListener("click", function(){
 	enable(houseway); //resets the houseway button after disabling it.
 	newHand();
 	reset();
+	for (let i = 0; i < hand.length; i++){
+		if (hand[i].rank === 16){
+			whichGJ();
+		}
+	}
 })
 
 //houseway button
@@ -416,7 +420,7 @@ const enable = (btn) => {
 	btn.disabled = false;
 }
 
-//need work.
+//needs work.
 const exceptions = (hand) => {
 	
 	return false;
@@ -436,7 +440,29 @@ const baccaratCount = (n, m) => {
 	}
 }
 
+//geejoon in progess
 function whichGJ() {
+	let baby = 0,
+		six = 0,
+		number = 0,
+		big = 0;
+		for (let i = 0; i < hand.length; i++){
+			if (hand[i].realValue === 4 || hand[i].realValue === 5){
+				baby += 1;
+			}
+			else if (hand[i].realValue === 6){
+				six += 1;
+			}
+			else if (hand[i].realValue >= 7 && hand[i].realValue <= 9){
+				number += 1;
+			}
+			else if (hand[i].realValue >= 10){
+				big += 1;
+			}
+		}
+		//decide when to use 3 or 6
+		if (true){
+		}
 	return false;
 }
 
@@ -570,8 +596,8 @@ const ascendingOrder = () => {
 	let switch1 = "";
 	let switch2 = "";
 	//starts from [0] and applies the switch 4 times(first forloop does)
-	for(var i = 0; i < hand.length; i++){
-		for(var ii = 0; ii < hand.length; ii++) {
+	for(let i = 0; i < hand.length; i++){
+		for(let ii = 0; ii < hand.length; ii++) {
 			//if it is not the last tile
 			if(ii != hand.length - 1) {
 				//compares the current tile its neighbor. if the current is bigger, switch with neighbor.
